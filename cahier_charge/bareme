@@ -1,0 +1,40 @@
+Bareme Projet C++
+- Ecriture Standard
+
+    - Ecriture commente + Makefile                                                   -3 pts
+
+    - Classe (1 Theme) + Fonction courte ( < 100 lignes)                  -1 pt
+
+    - Readme : le guide utilisateur complet                                       - 10 pts (si pas present)
+
+- Langage Objet
+
+    - Heritage (nouvelle classe)                                                            - 5 pts
+
+    - Toutes variables et fonction dans une classe                            -1 pt
+
+    - Code fonctionnel                                                                            - 24 pts
+
+- Interface graphique GTKmm
+
+    - Ergononie, ... Widgets fonctionnels                                              - 5 pts
+
+    - Jouabilite                                                                                           - 3 pts
+
+- Integralite du projet demande                                                          18 pts
+
+    - Faire tourner le jeu :
+
+               - 2 a 6 joueurs possibles
+
+               - lancement de de aleatoire
+
+               - gain des ressources en fonction du de
+
+               - creation des maisons ou villes ou routes avec les ressources et les regles de disponibilite
+
+               - perte de la moitie de ces ressources si le de fait 7 ET que vous avez 8 ou plus ressources en main
+
+- Bonus a discretion                                                                               1 a 24 pts
+
+- Les echanges de ressources sont optionnelles

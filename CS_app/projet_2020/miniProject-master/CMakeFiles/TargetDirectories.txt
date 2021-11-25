@@ -1,0 +1,3 @@
+/home/abdeljalil/catane_app/CS_app/miniProject-master/CMakeFiles/rebuild_cache.dir
+/home/abdeljalil/catane_app/CS_app/miniProject-master/CMakeFiles/edit_cache.dir
+/home/abdeljalil/catane_app/CS_app/miniProject-master/CMakeFiles/miniProject.dir
