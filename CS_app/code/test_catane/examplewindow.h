@@ -3,46 +3,21 @@
 
 #include <gtkmm.h>
 
-class DrawHelper : public Gtk::Layout
+class ExampleWindow : public Gtk::Window
 {
-
 public:
+  ExampleWindow();
+  virtual ~ExampleWindow();
 
-    DrawHelper();
-    ~DrawHelper();
+protected:
 
-private:
-
-    bool draw_image(const Cairo::RefPtr<::Cairo::Context>& p_context);
-    bool draw_rectangle(const Cairo::RefPtr<::Cairo::Context>& p_context);
-    bool add_current_shape(const Cairo::RefPtr<::Cairo::Context>& p_context);
-
-    Glib::RefPtr<Gdk::Pixbuf> m_buffer;
-
-    double m_startX;
-    double m_startY;
-
-    double m_endX;
-    double m_endY;
-
-    double m_width;
-    double m_height;
-
-    sigc::connection m_drawConnection;
+  //Child widgets:
+  Gtk::Box m_HBox;
+  Gtk::Box m_VBox, m_VBox2;
+  Gtk::Frame m_Frame_Normal, m_Frame_Multi, m_Frame_Left, m_Frame_Right,
+    m_Frame_LineWrapped, m_Frame_FilledWrapped, m_Frame_Underlined;
+  Gtk::Label m_Label_Normal, m_Label_Multi, m_Label_Left, m_Label_Right,
+    m_Label_LineWrapped, m_Label_FilledWrapped, m_Label_Underlined;
 };
-
-class MyWindow : public Gtk::Window
-{
-
-public:
-
-    MyWindow();
-
-private:
-
-    DrawHelper m_drawHelper;
-
-};
-
 
 #endif //GTKMM_EXAMPLEWINDOW_H

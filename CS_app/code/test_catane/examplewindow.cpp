@@ -1,119 +1,90 @@
-/* gtkmm example Copyright (C) 2002 gtkmm development team
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2
- * as published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- */
-
-#include <iostream>
 #include "examplewindow.h"
-#include <gtkmm.h>
+#include <iostream>
 
-DrawHelper::DrawHelper()
+ExampleWindow::ExampleWindow()
+:
+  m_HBox(Gtk::ORIENTATION_HORIZONTAL, 5),
+  m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
+  m_VBox2(Gtk::ORIENTATION_VERTICAL, 5),
+  m_Frame_Normal("Normal Label"),
+  m_Frame_Multi("Multi-line Label"),
+  m_Frame_Left("Left Justified Label"),
+  m_Frame_Right("Right Justified Label"),
+  m_Frame_LineWrapped("Line wrapped label"),
+  m_Frame_FilledWrapped("Filled, wrapped label"),
+  m_Frame_Underlined("Underlined label"),
+  m_Label_Normal("_This is a Normal label", true),
+  m_Label_Multi("This is a Multi-line label.\nSecond line\nThird line"),
+  m_Label_Left("This is a Left-Justified\nMulti-line label.\nThird line"),
+  m_Label_Right("This is a Right-Justified\nMulti-line label.\nThird line"),
+  m_Label_Underlined("This label is underlined!\n"
+          "This one is underlined in quite a funky fashion")
 {
-    // Create a pixel buffer containing the background image:
-    m_buffer = Gdk::Pixbuf::create_from_file("Board.png", 1000, 1000);
-    signal_draw().connect(sigc::mem_fun(*this, &DrawHelper::draw_image));
+  set_title("Label");
+  set_border_width(5);
 
-    // Enable signals:
-    add_events(Gdk::BUTTON1_MOTION_MASK | Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
+  add(m_HBox);
 
-    // Save initial pointer position when clicked:
-    signal_button_press_event().connect(
-        [this](GdkEventButton* p_event)
-        {
-            m_startX = p_event->x;
-            m_startY = p_event->y;
+  m_HBox.pack_start(m_VBox, Gtk::PACK_SHRINK);
 
-            return true;
-        });
+  m_Frame_Normal.add(m_Label_Normal);
+  m_VBox.pack_start(m_Frame_Normal, Gtk::PACK_SHRINK);
 
-    // Update rectangle when mouse is dragged:
-    signal_motion_notify_event().connect(
-        [this](GdkEventMotion* p_event)
-        {
-            m_endX = p_event->x;
-            m_endY = p_event->y;
+  m_Frame_Multi.add(m_Label_Multi);
+  m_VBox.pack_start(m_Frame_Multi, Gtk::PACK_SHRINK);
 
-            m_width  = m_endX - m_startX;
-            m_height = m_endY - m_startY;
+  m_Label_Left.set_justify(Gtk::JUSTIFY_LEFT);
+  m_Frame_Left.add(m_Label_Left);
+  m_VBox.pack_start(m_Frame_Left, Gtk::PACK_SHRINK);
 
-            signal_draw().connect(sigc::mem_fun(*this, &DrawHelper::draw_rectangle));
-            queue_draw();
+  m_Label_Right.set_justify(Gtk::JUSTIFY_RIGHT);
+  m_Frame_Right.add(m_Label_Right);
+  m_VBox.pack_start(m_Frame_Right, Gtk::PACK_SHRINK);
 
-            return true;
-        });
+  m_HBox.pack_start(m_VBox2, Gtk::PACK_SHRINK);
 
-    // Change background so it includes the shape just drawn by
-    // the user:
-    signal_button_release_event().connect(
-        [this](GdkEventButton* p_event)
-        {
-            // Notice we save to connection to later disconnect it:
-            m_drawConnection = signal_draw().connect(sigc::mem_fun(*this, &DrawHelper::add_current_shape));
+  m_Label_LineWrapped.set_text(
+          "This is an example of a line-wrapped label.  It "
+          /* add a big space to the next line to test spacing */
+          "should not be taking up the entire             "
+          "width allocated to it, but automatically "
+          "wraps the words to fit.  "
+          "The time has come, for all good men, to come to "
+          "the aid of their party.  "
+          "The sixth sheik's six sheep's sick.\n"
+          "     It supports multiple paragraphs correctly, "
+          "and  correctly   adds "
+          "many          extra  spaces. ");
+  m_Label_LineWrapped.set_line_wrap();
+  m_Frame_LineWrapped.add(m_Label_LineWrapped);
+  m_VBox2.pack_start(m_Frame_LineWrapped, Gtk::PACK_SHRINK);
 
-            return true;
-        });
+  m_Label_FilledWrapped.set_text(
+          "This is an example of a line-wrapped, filled label.  "
+          "It should be taking "
+          "up the entire              width allocated to it.  "
+          "Here is a sentence to prove "
+          "my point.  Here is another sentence. "
+          "Here comes the sun, do de do de do.\n"
+          "    This is a new paragraph.\n"
+          "    This is another newer, longer, better "
+          "paragraph.  It is coming to an end, "
+          "unfortunately.");
+  m_Label_FilledWrapped.set_justify(Gtk::JUSTIFY_FILL);
+  m_Label_FilledWrapped.set_line_wrap();
+  m_Frame_FilledWrapped.add(m_Label_FilledWrapped);
+  m_VBox2.pack_start(m_Frame_FilledWrapped, Gtk::PACK_SHRINK);
+
+  m_Label_Underlined.set_justify(Gtk::JUSTIFY_LEFT);
+  m_Label_Underlined.set_pattern (
+          "_________________________ _ _________ _ ______"
+          "     __ _______ ___");
+  m_Frame_Underlined.add(m_Label_Underlined);
+  m_VBox2.pack_start(m_Frame_Underlined, Gtk::PACK_SHRINK);
+
+  show_all_children();
 }
 
-DrawHelper::~DrawHelper() = default;
-
-bool DrawHelper::draw_image(const Cairo::RefPtr<::Cairo::Context>& p_context)
+ExampleWindow::~ExampleWindow()
 {
-    Gdk::Cairo::set_source_pixbuf(p_context, m_buffer, 0, 0);
-
-    p_context->paint();
-
-    return false;
 }
-
-bool DrawHelper::draw_rectangle(const Cairo::RefPtr<::Cairo::Context>& p_context)
-{
-    p_context->save();
-
-    p_context->set_line_width(2);
-    p_context->rectangle(m_startX, m_startY, m_width, m_height);
-    p_context->stroke();
-
-    p_context->restore();
-
-    return false;
-}
-
-bool DrawHelper::add_current_shape(const Cairo::RefPtr<::Cairo::Context>& p_context)
-{
-    // Save the current drawing, including the last drawn
-    // shape. This will become the new background (which will
-    // visually preserve the last drawn shape).
-    m_buffer = Gdk::Pixbuf::create(p_context->get_target(), 0, 0, 1000, 1000);
-    Gdk::Cairo::set_source_pixbuf(p_context, m_buffer, 0, 0);
-
-    p_context->paint();
-
-    // We disconnect the signal because we do not want it
-    // to keep getting called:
-    m_drawConnection.disconnect();
-
-    return false;
-}
-
-MyWindow::MyWindow()
-{
-    set_default_size(1000, 1000);
-
-    // Add draw helper:
-    add(m_drawHelper);
-
-    // Show all widgets:
-    show_all();
-}
-
