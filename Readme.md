@@ -1,4 +1,4 @@
-# Vampire Game
+# Catane Game
 
 In Vampire, players assume the personas of vampires — the immortal bloodsuckers of the horror genre — and guide these characters through a world virtually identical to our own. But these aren’t quite the vam- pires you might know from Dracula or Twilight. The vampires that exist now — or Kindred, or Cainites, as they commonly call themselves — are both similar to and different from what we might expect. In many ways, vampires resemble the familiar monsters of myth,cinema, folklore, and fiction. However — as many an intrepid vampire-hunter has learned to his sorrow — not all of the stories about vampires are true.
 
