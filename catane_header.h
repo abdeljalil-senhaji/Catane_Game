@@ -80,8 +80,14 @@ class MyGrid : public Gtk::Grid
     void on_button_place_maison();
     void on_button_place_colonie();
 
-    void set_clicked(bool N_val);
-    bool get_clicked();
+    void set_clicked_route(bool N_val);
+    bool get_clicked_route();
+
+    void set_clicked_maison(bool N_val);
+    bool get_clicked_maison();
+
+    void set_clicked_colonie(bool N_val);
+    bool get_clicked_colonie();
   protected:
     Pango::FontDescription font, font1;
     /**** Page 1 ***/
@@ -108,7 +114,9 @@ class MyGrid : public Gtk::Grid
     
 
   private:
-    bool clicked = false;
+    bool clicked_route = false;
+    bool clicked_maison = false; 
+    bool clicked_colonie = false;
     MyArea objArea;
 
 };

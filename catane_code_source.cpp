@@ -57,30 +57,30 @@ MyArea::MyArea(MyGrid & parent_win)  : parent(parent_win)
   // Reglage  de l'échelle d'image
   route1_image = route1_image->scale_simple(route1_image->get_width()*0.5, (route1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
-  // Stockege de lmage de la route 
-  route2_image = Gdk::Pixbuf::create_from_file("images/Route_Marron.png");
-  // Reglage  de l'échelle d'image
-  route2_image = route2_image->scale_simple(route2_image->get_width()*0.5, (route2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+  // // Stockege de lmage de la route 
+  // route2_image = Gdk::Pixbuf::create_from_file("images/Route_Marron.png");
+  // // Reglage  de l'échelle d'image
+  // route2_image = route2_image->scale_simple(route2_image->get_width()*0.5, (route2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
   // Stockege de lmage de la maison 
   maison1_image = Gdk::Pixbuf::create_from_file("images/Maison_Bleue.png");
   // Reglage  de l'échelle d'image
   maison1_image = maison1_image->scale_simple(maison1_image->get_width()*0.5, (maison1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
-  // Stockege de lmage de la maison 
-  maison2_image = Gdk::Pixbuf::create_from_file("images/Maison_Marron.png");
-  // Reglage  de l'échelle d'image
-  maison2_image = maison2_image->scale_simple(maison2_image->get_width()*0.5, (maison2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+  // // Stockege de lmage de la maison 
+  // maison2_image = Gdk::Pixbuf::create_from_file("images/Maison_Marron.png");
+  // // Reglage  de l'échelle d'image
+  // maison2_image = maison2_image->scale_simple(maison2_image->get_width()*0.5, (maison2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
-  // Stockege de lmage de la colonie 
-  colonie1_image = Gdk::Pixbuf::create_from_file("images/Colonie_Bleue.png");
-  // Reglage  de l'échelle d'image
-  colonie1_image = colonie1_image->scale_simple(colonie1_image->get_width()*0.5, (colonie1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+  // // Stockege de lmage de la colonie 
+  // colonie1_image = Gdk::Pixbuf::create_from_file("images/Colonie_Bleue.png");
+  // // Reglage  de l'échelle d'image
+  // colonie1_image = colonie1_image->scale_simple(colonie1_image->get_width()*0.5, (colonie1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
-  // Stockege de lmage de la colonie 
-  colonie2_image = Gdk::Pixbuf::create_from_file("images/Colonie_Marron.png");
-  // Reglage  de l'échelle d'image
-  colonie2_image = colonie2_image->scale_simple(colonie2_image->get_width()*0.5, (colonie2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+  // // Stockege de lmage de la colonie 
+  // colonie2_image = Gdk::Pixbuf::create_from_file("images/Colonie_Marron.png");
+  // // Reglage  de l'échelle d'image
+  // colonie2_image = colonie2_image->scale_simple(colonie2_image->get_width()*0.5, (colonie2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
   if (m_image) {
         this->signal_draw().connect(sigc::mem_fun(*this, &MyArea::on_draw));}
@@ -113,11 +113,25 @@ bool MyArea::on_button_press_event(GdkEventButton *event)
 
     // Ajouter une condition lorsque le button est activer :
 
-    if (parent.get_clicked() == true)
+    if (parent.get_clicked_route() == true)
     {
       X.push_back(event->x);
       Y.push_back(event->y);
-      parent.set_clicked(false);
+      parent.set_clicked_route(false);
+
+    }
+    if (parent.get_clicked_maison() == true)
+    {
+      X.push_back(event->x);
+      Y.push_back(event->y);
+      parent.set_clicked_maison(false);
+    }
+
+    if (parent.get_clicked_colonie() == true)
+    {
+      X.push_back(event->x);
+      Y.push_back(event->y);
+      parent.set_clicked_colonie(false);
 
     }
     
@@ -259,54 +273,54 @@ void MyGrid::Page1(){
 
 void MyGrid::on_button_place_route()
 {
-  this->set_clicked(true);
+  this->set_clicked_route(true);
 }
 
-void MyGrid::set_clicked(bool N_val)
+void MyGrid::set_clicked_route(bool N_val)
 {
-  this->clicked = N_val; //route
+  this->clicked_route = N_val; //route
 }
 
-bool MyGrid::get_clicked()
+bool MyGrid::get_clicked_route()
 {
-    return clicked ;
+    return clicked_route ;
+}
+
+
+//------------ Methode pour le button qui construit la maison -------------//
+
+void MyGrid::on_button_place_maison()
+{
+  this->set_clicked_maison(true);
+}
+
+void MyGrid::set_clicked_maison(bool N_val)
+{
+  this->clicked_maison = N_val; //maison
+}
+
+bool MyGrid::get_clicked_maison()
+{
+    return clicked_maison ;
 }
 
 
 // //------------ Methode pour le button qui construit la maison -------------//
 
-// void MyGrid::on_button_place_maison()
-// {
-//   this->set_clicked(true);
-// }
+void MyGrid::on_button_place_colonie()
+{
+  this->set_clicked_colonie(true);
+}
 
-// void MyGrid::set_clicked(bool N_val)
-// {
-//   this->clicked = N_val; //maison
-// }
+void MyGrid::set_clicked_colonie(bool N_val)
+{
+  this->clicked_colonie = N_val; //colonie
+}
 
-// bool MyGrid::get_clicked()
-// {
-//     return clicked ;
-// }
-
-
-// //------------ Methode pour le button qui construit la maison -------------//
-
-// void MyGrid::on_button_place_colonie()
-// {
-//   this->set_clicked(true);
-// }
-
-// void MyGrid::set_clicked(bool N_val)
-// {
-//   this->clicked = N_val; //colonie
-// }
-
-// bool MyGrid::get_clicked()
-// {
-//     return clicked ;
-// }
+bool MyGrid::get_clicked_colonie()
+{
+    return clicked_colonie ;
+}
 
 
 
@@ -361,13 +375,13 @@ void MyGrid::Page2()
    
 
     buttonHouse.add_label("House");
-    //buttonHouse.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_maison));
+    buttonHouse.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_maison));
     gridGame1.attach(buttonHouse, 0,3, 1, 1);
 
     
 
     buttonClan.add_label("Clan");
-    //buttonClan.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_colonie));
+    buttonClan.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_colonie));
     gridGame1.attach(buttonClan, 0, 4, 1, 1);
     
 
