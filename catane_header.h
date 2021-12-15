@@ -25,7 +25,9 @@ class MyGrid ;
 
 class MyArea : public Gtk::DrawingArea
 {
-public:
+  public:
+
+
   MyArea(MyGrid & parent_win  );
   virtual ~MyArea();
   void switch_to_circle();
@@ -33,9 +35,10 @@ public:
   void fill_tokens();
 
 
-protected:
+  protected:
+  
   //Override default signal handler:
- 
+
   bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 
   // Override mouse events
@@ -58,24 +61,42 @@ protected:
   bool second_click;
 
   private:
-  std::vector<int> X,Y; 
+  std::vector<int> X,Y;    //route
+  std::vector<int> X1,Y1;  //maison
+  std::vector<int> X2,Y2;  //colonie
+  //Gamer2
+  std::vector<int> X3,Y3;    //route2
+  std::vector<int> X4,Y4;  //maison2
+  std::vector<int> X5,Y5;  //colonie2
+
+  //Place tuilles : 
+  std::vector<int> X_tuille{227, 226, 363, 501};
+  std::vector<int> Y_tuille{180, 342, 263, 342};
   // appel par reffernce de la classe parent Mygrid 
   MyGrid & parent ; 
 };
 
 
 
-//class MyGrid : public Gtk::Grid, public Fenetre
+/**
+ * Main grid ajouter a la window.
+*/
+
+
 class MyGrid : public Gtk::Grid
 {
   public :
+
+
     MyGrid(); //constructeur
     virtual ~MyGrid(); //destructeur
     void Page2();
     void Page1();
     void  lancerDe();
     void on_button_info_clicked();
+    void on_button_info_clicked2();
 
+    // Gamer 1
     void on_button_place_route();
     void on_button_place_maison();
     void on_button_place_colonie();
@@ -88,7 +109,28 @@ class MyGrid : public Gtk::Grid
 
     void set_clicked_colonie(bool N_val);
     bool get_clicked_colonie();
+
+    // Gamer 2
+
+    void on_button_place_route2();
+    void on_button_place_maison2();
+    void on_button_place_colonie2();
+
+    void set_clicked_route2(bool N_val);
+    bool get_clicked_route2();
+
+    void set_clicked_maison2(bool N_val);
+    bool get_clicked_maison2();
+
+    void set_clicked_colonie2(bool N_val);
+    bool get_clicked_colonie2();
+
+
+
   protected:
+
+
+  
     Pango::FontDescription font, font1;
     /**** Page 1 ***/
     Gtk::Label message;
@@ -114,35 +156,37 @@ class MyGrid : public Gtk::Grid
     
 
   private:
+
+
     bool clicked_route = false;
     bool clicked_maison = false; 
     bool clicked_colonie = false;
+    // Gamer 2 :
+    bool clicked_route2 = false;
+    bool clicked_maison2 = false; 
+    bool clicked_colonie2 = false;
     MyArea objArea;
 
 };
 
 ////////////////////////// class de la fenêtre principale ///////////////////////////////////////
 
+/**
+  * Fenetre principale contenant la grid
+*/
 
 class Fenetre : public Gtk::Window
-        /**
-         * Main window holding the grid
-         */
+
 {
 
 public:
     Fenetre();
     virtual ~Fenetre(); // Setup window
-    //Signal handlers:
-    
-
 
 protected:
     //Member widgets:
     
     MyGrid welcome;
-
-
 
 };
 

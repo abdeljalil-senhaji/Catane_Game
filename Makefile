@@ -21,7 +21,7 @@ STFLAGS    = `pkg-config gtkmm-3.0 --libs`
 
 
 
-abdel: $(OBJFILES)
+catane: $(OBJFILES)
 	$(CC) $^ $(STFLAGS) -o $(OBJDIR)/$@
 
 # How to make the object files:
@@ -30,4 +30,4 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 
 # Cleaning target (only works with fileutils):
 clean:
-	/bin/rm -f $(OBJFILES) abdel
+	/bin/rm -f $(OBJFILES) catane

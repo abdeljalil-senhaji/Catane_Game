@@ -8,7 +8,7 @@
 #include <cairomm/context.h>
 #include <gdkmm/general.h> 
 #include <glibmm/fileutils.h>
-using namespace std ;
+
 
 
 
@@ -40,6 +40,8 @@ Fenetre::~Fenetre()
 {
 }
 
+
+
 ////////////////////////////////// classe image-dessin ///////////////////////////////////////////
 
 //------------ constructeur classe MyArea (dessin)----------------//
@@ -52,35 +54,38 @@ MyArea::MyArea(MyGrid & parent_win)  : parent(parent_win)
   // Reglage  de l'échelle d'image 
   m_image = m_image->scale_simple(m_image->get_width()*0.15, (m_image->get_height()*0.15), Gdk::INTERP_BILINEAR);
 
+  // Gamer 1
   // Stockege de lmage de la route 
   route1_image = Gdk::Pixbuf::create_from_file("images/Route_Bleue.png");
   // Reglage  de l'échelle d'image
   route1_image = route1_image->scale_simple(route1_image->get_width()*0.5, (route1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
-  
-  // // Stockege de lmage de la route 
-  // route2_image = Gdk::Pixbuf::create_from_file("images/Route_Marron.png");
-  // // Reglage  de l'échelle d'image
-  // route2_image = route2_image->scale_simple(route2_image->get_width()*0.5, (route2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
-  
+ 
   // Stockege de lmage de la maison 
   maison1_image = Gdk::Pixbuf::create_from_file("images/Maison_Bleue.png");
   // Reglage  de l'échelle d'image
   maison1_image = maison1_image->scale_simple(maison1_image->get_width()*0.5, (maison1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
-  // // Stockege de lmage de la maison 
-  // maison2_image = Gdk::Pixbuf::create_from_file("images/Maison_Marron.png");
-  // // Reglage  de l'échelle d'image
-  // maison2_image = maison2_image->scale_simple(maison2_image->get_width()*0.5, (maison2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+  // Stockege de lmage de la colonie 
+  colonie1_image = Gdk::Pixbuf::create_from_file("images/Colonie_Bleue.png");
+  // Reglage  de l'échelle d'image
+  colonie1_image = colonie1_image->scale_simple(colonie1_image->get_width()*0.5, (colonie1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
-  // // Stockege de lmage de la colonie 
-  // colonie1_image = Gdk::Pixbuf::create_from_file("images/Colonie_Bleue.png");
-  // // Reglage  de l'échelle d'image
-  // colonie1_image = colonie1_image->scale_simple(colonie1_image->get_width()*0.5, (colonie1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+  //Gamer 2
+
+  // Stockege de lmage de la route 
+  route2_image = Gdk::Pixbuf::create_from_file("images/Route_Marron.png");
+  // Reglage  de l'échelle d'image
+  route2_image = route2_image->scale_simple(route2_image->get_width()*0.4, (route2_image->get_height()*0.4), Gdk::INTERP_BILINEAR);
   
-  // // Stockege de lmage de la colonie 
-  // colonie2_image = Gdk::Pixbuf::create_from_file("images/Colonie_Marron.png");
-  // // Reglage  de l'échelle d'image
-  // colonie2_image = colonie2_image->scale_simple(colonie2_image->get_width()*0.5, (colonie2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+  // Stockege de lmage de la maison 
+  maison2_image = Gdk::Pixbuf::create_from_file("images/Maison_Marron.png");
+  // Reglage  de l'échelle d'image
+  maison2_image = maison2_image->scale_simple(maison2_image->get_width()*0.5, (maison2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
+
+  // Stockege de lmage de la colonie 
+  colonie2_image = Gdk::Pixbuf::create_from_file("images/Colonie_Marron.png");
+  // Reglage  de l'échelle d'image
+  colonie2_image = colonie2_image->scale_simple(colonie2_image->get_width()*0.4, (colonie2_image->get_height()*0.4), Gdk::INTERP_BILINEAR);
   
   if (m_image) {
         this->signal_draw().connect(sigc::mem_fun(*this, &MyArea::on_draw));}
@@ -94,6 +99,8 @@ MyArea::MyArea(MyGrid & parent_win)  : parent(parent_win)
         //
         //
 }
+
+
 
 
 // Mouse button press event
@@ -111,6 +118,7 @@ bool MyArea::on_button_press_event(GdkEventButton *event)
           first_click=true;
           queue_draw();
 
+    //Gamer 1
     // Ajouter une condition lorsque le button est activer :
 
     if (parent.get_clicked_route() == true)
@@ -118,27 +126,53 @@ bool MyArea::on_button_press_event(GdkEventButton *event)
       X.push_back(event->x);
       Y.push_back(event->y);
       parent.set_clicked_route(false);
-
     }
+
     if (parent.get_clicked_maison() == true)
     {
-      X.push_back(event->x);
-      Y.push_back(event->y);
+      X1.push_back(event->x);
+      Y1.push_back(event->y);
       parent.set_clicked_maison(false);
     }
-
+    
     if (parent.get_clicked_colonie() == true)
     {
-      X.push_back(event->x);
-      Y.push_back(event->y);
+      X2.push_back(event->x);
+      Y2.push_back(event->y);
       parent.set_clicked_colonie(false);
+    }
 
+    //Gmaer 2 : 
+
+    if (parent.get_clicked_route2() == true)
+    {
+      X3.push_back(event->x);
+      Y3.push_back(event->y);
+      parent.set_clicked_route2(false);
+    }
+
+    if (parent.get_clicked_maison2() == true)
+    {
+      X4.push_back(event->x);
+      Y4.push_back(event->y);
+      parent.set_clicked_maison2(false);
+    }
+    
+    if (parent.get_clicked_colonie2() == true)
+    {
+      X5.push_back(event->x);
+      Y5.push_back(event->y);
+      parent.set_clicked_colonie2(false);
     }
     
   }
   // The event has been handled.
     return true;
 }
+
+
+
+
 
 // methode pour le reglage de l'image :
 bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
@@ -157,6 +191,8 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
   // Boucle pour eviter le cheuvechement de l'image sur image et assurer le bon emplacement de l'image
 
+  //Gamer 1
+
   for (int i=0 ; i<X.size();i++ )
     {
 
@@ -166,50 +202,68 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->rectangle(0, 0, get_width(), get_height()); 
     cr->fill();
     cr->restore();}
+    }
 
-    // 
-    if (route2_image) {
-    cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, route2_image, X[i]-10, Y[i]-10);
-    cr->rectangle(0, 0, get_width(), get_height()); 
-    cr->fill();
-    cr->restore();}
-
+  for (int i=0 ; i<X1.size();i++ )
+    {
     if (maison1_image) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, maison1_image, X[i]-10, Y[i]-10);
+    Gdk::Cairo::set_source_pixbuf(cr, maison1_image, X1[i]-10, Y1[i]-10);
     cr->rectangle(0, 0, get_width(), get_height()); 
     cr->fill();
     cr->restore();}
-
-    if (maison2_image) {
-    cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, maison2_image, X[i]-10, Y[i]-10);
-    cr->rectangle(0, 0, get_width(), get_height()); 
-    cr->fill();
-    cr->restore();}
-
+    } 
+     
+  for (int i=0 ; i<X2.size();i++ )
+    {
     if (colonie1_image) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, colonie1_image, X[i]-10, Y[i]-10);
+    Gdk::Cairo::set_source_pixbuf(cr, colonie1_image, X2[i]-10, Y2[i]-10);
     cr->rectangle(0, 0, get_width(), get_height()); 
     cr->fill();
     cr->restore();}
-
+    }
   
+  // gamar 2 :
+
+  for (int i=0 ; i<X3.size();i++ )
+    { 
+    if (route2_image) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr, route2_image, X3[i]-10, Y3[i]-10);
+    cr->rectangle(0, 0, get_width(), get_height()); 
+    cr->fill();
+    cr->restore();}
+    }
+
+  for (int i=0 ; i<X4.size();i++ )
+    {
+    if (maison2_image) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr, maison2_image, X4[i]-10, Y4[i]-10);
+    cr->rectangle(0, 0, get_width(), get_height()); 
+    cr->fill();
+    cr->restore();}
+    }
+    
+  for (int i=0 ; i<X5.size();i++ )
+    {
     if (colonie2_image) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, colonie2_image, X[i]-10, Y[i]-10);
+    Gdk::Cairo::set_source_pixbuf(cr, colonie2_image, X5[i]-10, Y5[i]-10);
     cr->rectangle(0, 0, get_width(), get_height()); 
     cr->fill();
     cr->restore();}
-
-
     }
+
+    
 
 
   return false;
 }
+
+
+
 
 //------------ deconstructeur classe MyArea (dessin)----------------//
 
@@ -220,12 +274,13 @@ MyArea::~MyArea()
 
 
 
-
 ////////////////////////////////////// classe grid ///////////////////////////////////////////////////
 
 
 
-//------------ Constructeur classe MyGrid ----------------//
+/**
+  * Grid constructor, will set the different fonts, set parameters for the first page, connect all signals
+*/
 
 MyGrid::MyGrid() : objArea(*this)
 {
@@ -246,14 +301,12 @@ MyGrid::MyGrid() : objArea(*this)
 }
 
 
-/*
-  Methode d'affichage de la premiere page pour commancer le jeu
+
+/**
+  *  Display first page, with Vampire cover and the create character button
 */
 
 void MyGrid::Page1(){
-    /**
-     *  Display first page, with catane cover and the create character button
-     */
     // Clean widgets
   for (Widget *element : this->get_children ())
         this->remove (*element);
@@ -269,7 +322,11 @@ void MyGrid::Page1(){
     this->show_all();
 }
 
-//------------ Methode pour le button qui construit la route -------------//
+
+
+
+//----------------------  Gamer 1  ------------------------//
+//------------ Methode pour le button gamer 1 qui construit la route -------------//
 
 void MyGrid::on_button_place_route()
 {
@@ -287,7 +344,9 @@ bool MyGrid::get_clicked_route()
 }
 
 
-//------------ Methode pour le button qui construit la maison -------------//
+
+
+//------------ Methode pour le button gamer 1 qui construit la maison -------------//
 
 void MyGrid::on_button_place_maison()
 {
@@ -305,7 +364,12 @@ bool MyGrid::get_clicked_maison()
 }
 
 
-// //------------ Methode pour le button qui construit la maison -------------//
+
+
+
+//////------------ Methode pour le button gamer 1 qui construit la colonie -------------//////
+
+
 
 void MyGrid::on_button_place_colonie()
 {
@@ -324,8 +388,78 @@ bool MyGrid::get_clicked_colonie()
 
 
 
-/*
-  methode page2 pour l'affechage de la deuxieme grid ou il ya le plateau du jeu.
+
+
+//----------------------  Gamer 2  ------------------------//
+
+//------------ Methode pour le button gamer 2 qui construit la route -------------//
+
+void MyGrid::on_button_place_route2()
+{
+  this->set_clicked_route2(true);
+}
+
+void MyGrid::set_clicked_route2(bool N_val)
+{
+  this->clicked_route2 = N_val; //route
+}
+
+bool MyGrid::get_clicked_route2()
+{
+    return clicked_route2 ;
+}
+
+
+
+
+
+
+//------------ Methode pour le button gamer 2 qui construit la maison -------------//
+
+void MyGrid::on_button_place_maison2()
+{
+  this->set_clicked_maison2(true);
+}
+
+void MyGrid::set_clicked_maison2(bool N_val)
+{
+  this->clicked_maison2 = N_val; //maison
+}
+
+bool MyGrid::get_clicked_maison2()
+{
+    return clicked_maison2 ;
+}
+
+
+
+
+
+//////------------ Methode pour le button gamer 2 qui construit la colonie -------------//////
+
+
+
+
+void MyGrid::on_button_place_colonie2()
+{
+  this->set_clicked_colonie2(true);
+}
+
+void MyGrid::set_clicked_colonie2(bool N_val)
+{
+  this->clicked_colonie2 = N_val; //colonie
+}
+
+bool MyGrid::get_clicked_colonie2()
+{
+    return clicked_colonie2 ;
+}
+
+
+
+
+/**
+  * Initialisation de la page 2. cree les labels, connecte le buttons, et utiliser l'analyseur pour remplir le menubar
 */
 
 
@@ -344,17 +478,16 @@ void MyGrid::Page2()
     menuBar.append(menuFiles);
     // // Create a sub menu in files
     menuFiles.set_submenu(subMenuFiles);
-    open.set_label("OPEN");
+    open.set_label("Rules-Game-Catane");
     subMenuFiles.append(open);
-    close.set_label("CLOSE");
+    close.set_label("Concept-Catane");
     subMenuFiles.append(close);
     subMenuFiles.append(hline); // Add a separator
     quit.set_label("QUIT");
     subMenuFiles.append(quit);
 
     //on fait l'appel de l'instance de la classe Myarea
-    close.signal_activate().connect(sigc::mem_fun(*this, &MyGrid::on_button_info_clicked));
-    //
+    close.signal_activate().connect(sigc::mem_fun(*this, &MyGrid::on_button_info_clicked2));
     open.signal_activate().connect(sigc::mem_fun(*this, &MyGrid::on_button_info_clicked));
     quit.signal_activate().connect(sigc::ptr_fun(&Gtk::Main::quit));
     menuLayout.pack_start(menuBar, Gtk::PACK_SHRINK); //nous voulions que tous les widgets aient la même taille.
@@ -398,15 +531,15 @@ void MyGrid::Page2()
     gridGame2.attach(etiquette1, 0, 1, 1, 1);
 
     buttonRoute1.add_label("Road");
-    //buttonRoute1.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_route));
+    buttonRoute1.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_route2));
     gridGame2.attach(buttonRoute1, 0, 2, 1, 1);
   
     buttonHouse1.add_label("House");
-    //buttonHouse1.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_maison));
+    buttonHouse1.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_maison2));
     gridGame2.attach(buttonHouse1, 0, 3, 1, 1);
     
     buttonClan1.add_label("Clan");
-    //buttonClan1.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_colonie));
+    buttonClan1.signal_clicked().connect(sigc::mem_fun(*this, &MyGrid::on_button_place_colonie2));
     gridGame2.attach(buttonClan1, 0, 4, 1, 1);
     
     gridGame2.set_row_spacing(2);
@@ -415,10 +548,10 @@ void MyGrid::Page2()
     
 
     ////-------- Des --------////
-   
+
     LabelDice.set_text("Dice game :");
     LabelDice.set_justify(Gtk::JUSTIFY_RIGHT);
-    LabelDice.set_text("Dice game is "+ to_string(2*(rand()%6+1)));
+    LabelDice.set_text("Dice game is "+ std::__cxx11::to_string(2*(rand()%6+1)));
 
     gridDe.attach(LabelDice, 0, 0, 1, 1);
 
@@ -426,7 +559,10 @@ void MyGrid::Page2()
     buttonDes.signal_clicked().connect(sigc::mem_fun(*this,&MyGrid::lancerDe));
     gridDe.attach(buttonDes, 0, 1, 1, 1);
 
-    //// Next part game 
+
+
+    ////---- Next part game ----////
+
     LabelBuild.set_text("Build game");
     LabelBuild.set_justify(Gtk::JUSTIFY_RIGHT);
     gridDe.attach(LabelBuild, 1, 0, 1, 1);
@@ -444,11 +580,11 @@ void MyGrid::Page2()
 
     ////----- Plateau Image---------////
 
+
     imageBox.set_size_request(800,500);
     imageBox.add(objArea);
     m_Frame.add(imageBox);
     m_Frame.set_hexpand(true);
-    
     this->attach(m_Frame, 1, 5, 1,1);
 
 
@@ -486,7 +622,11 @@ void MyGrid::Page2()
     this->attach(gridRessource, 0, 5, 1, 1);
 
 
+
+
     ////----- Attach all------////
+
+
 
     this->override_background_color(Gdk::RGBA("#fceeee"));
     this->show_all();
@@ -499,7 +639,7 @@ void MyGrid::Page2()
 
 void MyGrid::lancerDe() {
 	// en genere la somme de deux valeurs aléatoire  
-  LabelDice.set_text("Dice game is "+ to_string((rand()%6+1) + (rand()%6+1)));
+  LabelDice.set_text("Dice game is "+ std::__cxx11::to_string((rand()%6+1) + (rand()%6+1)));
 }
 
 
@@ -517,6 +657,15 @@ void MyGrid::on_button_info_clicked()
     " - Une route peut uniquement être construite sur une intersection voisine à: une route, une colonie ou une ville de la même couleur. "
     " - Une colonie doit être construite sur une intersection, par laquelle arrive au moins une route de la couleur du joueur."
     " - Une colonie ne peut être construite que sur une Intersection (*) dont aucune des 3 intersections voisines ne possède de colonie ou de ville (quel que soit leur propriétaire"
+    );
+  dialog.run();
+}
+
+void MyGrid::on_button_info_clicked2()
+{
+  Gtk::Window f;
+  Gtk::MessageDialog dialog(f, "Colonne de Catane ?");
+  dialog.set_secondary_text("Les Colons de Catane (en allemand : Die Siedler von Catan), Les Colons de Katane1, Catane2 ou Catan3, est un jeu de societe de Klaus Teuber, edite en France en 1995 par Jeux Descartes, repris en 2002 par Tilsit Editions, puis en 2006 par la societe quebecoise Filosofia."
     );
   dialog.run();
 }

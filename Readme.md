@@ -1,9 +1,26 @@
+![](/images/catane.png)
+
+
+
+
 # Catane Game
 
-In Vampire, players assume the personas of vampires — the immortal bloodsuckers of the horror genre — and guide these characters through a world virtually identical to our own. But these aren’t quite the vam- pires you might know from Dracula or Twilight. The vampires that exist now — or Kindred, or Cainites, as they commonly call themselves — are both similar to and different from what we might expect. In many ways, vampires resemble the familiar monsters of myth,cinema, folklore, and fiction. However — as many an intrepid vampire-hunter has learned to his sorrow — not all of the stories about vampires are true.
+[![Documentation](https://img.shields.io/badge/Documentation-github-brightgreen.svg?style=for-the-badge)](https://github.com/abdeljalil-senhaji/Vampire_Game)
 
 
-# Installation
+In Vampire, players assume the personas of vampires — the immortal bloodsuckers of the horror genre — and guide these characters through a world virtually identical to our own. But these aren’t quite the vam- pires you might know from Dracula or Twilight. The vampires that exist now — or Kindred, or Cainites, as they commonly call themselves — are both similar to and different from what we might expect. In many ways, vampires resemble the familiar monsters of myth,cinema, folklore, and fiction. However — as many an intrepid vampire-hunter has learned to his sorrow — not all of the stories about vampires are true. 
+
+(https://catanuniverse.com/fr/)
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for running and testing purposes.
+
+### Building
+
+A step by step series of examples that tell you how to get the executable files
+
+In the project root directory, generate the *Makefile* 
 
 Before the installation, make sure you have C++ 2011 version and Gtkmm 3.0.
 
@@ -14,30 +31,46 @@ Before the installation, make sure you have C++ 2011 version and Gtkmm 3.0.
 
 To get started, write in the console the following command:
 
-`make clean; make; ./abdel;`
+`make clean; 
+
+make; 
+
+./catane;`
 
 
-# How to play
+## Tree view
 
-- Choose Mental, Social and Physical attributes, You have 15 points to give to the three attributes, but you have to respect the repartition 7/5/3. For example, you can give 7 points to the physical attributes, 5 to social and 3 to mental.
-
-- Choose the abilites: the skills, talents and knowledges. You have 27 points to attribute to each categorie, make sure you respect the repartition 13/9/5, if you don't, a pop-up window will display to remember you of the rules.
-
-- Choose the advantages: disciplines, backgrounds and virtues, here you must respect the imposed repartition, 7 points to virtues, 3 to disciplines and 5 to backgrounds.
-
-- Choose merits and flows.
-
-- Push `Valider personnage` button, if everything goes well, a pop-up window will display to inform you that your information has been saved.
-
-- Push `Afficher les formulaires` button, the 4 pages filled with information you gave will display. The information you selected is written in red and the points you attributed are also red.
+* `/modele` : the headers and sources files relating to the model part of the project
+* `/vue` : the headers and sources files relating to the view part of the project
+* `/controleur` : the headers and sources files relating to the controller part of the project
+* `/images` : the images necesary for the project
+* `/fonts` : the fonts necesary for the project
+* `/tests` : the headers and sources files relating to the tests of the model part of the project
+* `/cmake` : the CMake script to find the SDL2-ttf library
+* `/documents` : the documents used for the project management
 
 Please, see this following example:
 
 ![Example](Tutorial.gif)
 
 
+## Built With
+
+* [Code::visual::studio](https://code.visualstudio.com/) - The IDE used
+* [Make](https://www.gnu.org/software/make/) - Build system
+* [GTKmm](https://gtkmm.org/en/) - Graphical library used
+* [Cairo](https://www.cairographics.org/) - library used dessing
+* [Pango](https://pango.gnome.org/) - library used backegrond
+* [GitHub](https://github.com/abdeljalil-senhaji/Catane_Game) - Our original repository
+
+
 # Code
 
 The interface was developed in oriented-object format, each window is a class. Each class contains methods for points attribution and texts/drawings on the formulaires.
+
+
+## Author
+
+* **Senhaji Rachik Abdeljalil** 
 
 
