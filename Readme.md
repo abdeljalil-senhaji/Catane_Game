@@ -37,9 +37,13 @@ To get started, write in the console the following command:
 
 `./catane`
 
+Or simplifiy:
+
+`make clean; make; ./catane;`
+
 Please, see this following example:
 
-![Example](Tutorial_Game.gif)
+![Demo](Tutorial_Game.gif)
 
 ## Tree view
 
