@@ -1,10 +1,10 @@
 #include "catane_header.h"
 
 
-///////////////////////////////////////// classe fenetre principal /////////////////////////////////////////////
+///////////////////////////////////////// main window class /////////////////////////////////////////////
 
 
-//------------ constructeur classe Fenetre ----------------//
+//------------ Window class constructor ----------------//
 
 Fenetre::Fenetre()
 {
@@ -22,56 +22,56 @@ Fenetre::Fenetre()
 }
 
 
-//------------ destructeur classe Fenetre ----------------//
+//------------ Window class destructor ----------------//
 Fenetre::~Fenetre()
 {
 }
 
 
 
-////////////////////////////////// classe image-dessin ///////////////////////////////////////////
+////////////////////////////////// class image drawing ///////////////////////////////////////////
 
-//------------ constructeur classe MyArea (dessin)----------------//
+//------------ constructor class MyArea (drawing)----------------//
 
 MyArea::MyArea(MyGrid & parent_win)  : parent(parent_win)
 {
   
-  // Stockege de image de la plateau 
+  // Shelf image storage 
   m_image = Gdk::Pixbuf::create_from_file("images/plateau.png", 3650, 3650);
-  // Reglage  de l'échelle d'image 
+  // Image scale adjustment
   m_image = m_image->scale_simple(m_image->get_width()*0.15, (m_image->get_height()*0.15), Gdk::INTERP_BILINEAR);
 
   // Gamer 1
-  // Stockege de image de la route 
+  // Road image storage
   route1_image = Gdk::Pixbuf::create_from_file("images/Route_Bleue.png");
-  // Reglage  de l'échelle d'image
+  // Image scale adjustment
   route1_image = route1_image->scale_simple(route1_image->get_width()*0.5, (route1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
  
-  // Stockege de lmage de la maison 
+  // House image storage  
   maison1_image = Gdk::Pixbuf::create_from_file("images/Maison_Bleue.png");
-  // Reglage  de l'échelle d'image
+  // Image scale adjustment
   maison1_image = maison1_image->scale_simple(maison1_image->get_width()*0.5, (maison1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
-  // Stockege de lmage de la colonie 
+  // Image storage of the colony
   colonie1_image = Gdk::Pixbuf::create_from_file("images/Colonie_Bleue.png");
-  // Reglage  de l'échelle d'image
+  // Image scale adjustment
   colonie1_image = colonie1_image->scale_simple(colonie1_image->get_width()*0.5, (colonie1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
   
   //Gamer 2
 
-  // Stockege de lmage de la route 
+  // Road image storage
   route2_image = Gdk::Pixbuf::create_from_file("images/Route_Marron.png");
-  // Reglage  de l'échelle d'image
+  // Image scale adjustment
   route2_image = route2_image->scale_simple(route2_image->get_width()*0.4, (route2_image->get_height()*0.4), Gdk::INTERP_BILINEAR);
   
-  // Stockege de lmage de la maison 
+  // House image storage 
   maison2_image = Gdk::Pixbuf::create_from_file("images/Maison_Marron.png");
-  // Reglage  de l'échelle d'image
+  // Image scale adjustment
   maison2_image = maison2_image->scale_simple(maison2_image->get_width()*0.5, (maison2_image->get_height()*0.5), Gdk::INTERP_BILINEAR);
 
-  // Stockege de lmage de la colonie 
+  // Image storage of the colony
   colonie2_image = Gdk::Pixbuf::create_from_file("images/Colonie_Marron.png");
-  // Reglage  de l'échelle d'image
+  // Image scale adjustment
   colonie2_image = colonie2_image->scale_simple(colonie2_image->get_width()*0.4, (colonie2_image->get_height()*0.4), Gdk::INTERP_BILINEAR);
   
   if (m_image) {
@@ -81,10 +81,6 @@ MyArea::MyArea(MyGrid & parent_win)  : parent(parent_win)
         //startvalues
         first_click=false;
         second_click=false;
-        // image sous images des tokens 
-        //
-        //
-        //
 }
 
 
@@ -106,7 +102,7 @@ bool MyArea::on_button_press_event(GdkEventButton *event)
           queue_draw();
 
     //Gamer 1
-    // Ajouter une condition lorsque le button est activer :
+    // Add a condition when the button is activated:
 
     if (parent.get_clicked_route() == true)
     {
@@ -161,7 +157,7 @@ bool MyArea::on_button_press_event(GdkEventButton *event)
 
 
 
-// methode pour le reglage de l'image :
+// method for picture adjustment:
 bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
   
@@ -169,12 +165,11 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   if (m_image) {
     cr->save();
     Gdk::Cairo::set_source_pixbuf(cr, m_image, 160, 0);
-    //Gdk::Cairo::set_source_pixbuf(cr, m_image);
     cr->rectangle(0, 0, get_width(), get_height());
     cr->fill();
     cr->restore();
   }
-  // ajoute des tuilles de facons aleatoire en utilisent la methode rand
+  // add tiles randomly using the rand method
 
   std::vector<int> T ={2,10,7,3,11,5,6,7,11,3,6,5,6,2,10,3,11,8,7,2,6,9,10,4,11,6,7,8,10};
   for (int i=0, j=0 ; i<X_tuille.size() ,j <T.size();i++ , j++ )
@@ -191,7 +186,7 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->restore();
   }
 
-  // Boucle pour eviter le cheuvechement de l'image sur image et assurer le bon emplacement de l'image
+  // Loop to avoid image-to-image overlap and ensure the correct location of the image
 
   //Gamer 1
 
@@ -267,7 +262,7 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 
 
-//------------ deconstructeur classe MyArea (dessin)----------------//
+//------------ deconstructeur class MyArea (dessin)----------------//
 
 MyArea::~MyArea()
 {
@@ -276,7 +271,7 @@ MyArea::~MyArea()
 
 
 
-////////////////////////////////////// classe grid ///////////////////////////////////////////////////
+////////////////////////////////////// class grid ///////////////////////////////////////////////////
 
 
 
@@ -328,7 +323,7 @@ void MyGrid::Page1(){
 
 
 //----------------------  Gamer 1  ------------------------//
-//------------ Methode pour le button gamer 1 qui construit la route -------------//
+//------------ Method for the button gamer 1 who builds the road -------------//
 
 void MyGrid::on_button_place_route()
 {
@@ -337,7 +332,7 @@ void MyGrid::on_button_place_route()
 
 void MyGrid::set_clicked_route(bool N_val)
 {
-  this->clicked_route = N_val; //route
+  this->clicked_route = N_val; //road
 }
 
 bool MyGrid::get_clicked_route()
@@ -348,7 +343,7 @@ bool MyGrid::get_clicked_route()
 
 
 
-//------------ Methode pour le button gamer 1 qui construit la maison -------------//
+//------------ Method for the gamer button 1 that builds the house -------------//
 
 void MyGrid::on_button_place_maison()
 {
@@ -357,7 +352,7 @@ void MyGrid::on_button_place_maison()
 
 void MyGrid::set_clicked_maison(bool N_val)
 {
-  this->clicked_maison = N_val; //maison
+  this->clicked_maison = N_val; //house
 }
 
 bool MyGrid::get_clicked_maison()
@@ -369,7 +364,7 @@ bool MyGrid::get_clicked_maison()
 
 
 
-//////------------ Methode pour le button gamer 1 qui construit la colonie -------------//////
+//////------------ Method for the gamer button 1 that builds the colony -------------//////
 
 
 
@@ -380,7 +375,7 @@ void MyGrid::on_button_place_colonie()
 
 void MyGrid::set_clicked_colonie(bool N_val)
 {
-  this->clicked_colonie = N_val; //colonie
+  this->clicked_colonie = N_val; //colony
 }
 
 bool MyGrid::get_clicked_colonie()
@@ -394,7 +389,7 @@ bool MyGrid::get_clicked_colonie()
 
 //----------------------  Gamer 2  ------------------------//
 
-//------------ Methode pour le button gamer 2 qui construit la route -------------//
+//------------ Method for the gamer button 2 that builds the  road -------------//
 
 void MyGrid::on_button_place_route2()
 {
@@ -403,7 +398,7 @@ void MyGrid::on_button_place_route2()
 
 void MyGrid::set_clicked_route2(bool N_val)
 {
-  this->clicked_route2 = N_val; //route
+  this->clicked_route2 = N_val; 
 }
 
 bool MyGrid::get_clicked_route2()
@@ -416,7 +411,7 @@ bool MyGrid::get_clicked_route2()
 
 
 
-//------------ Methode pour le button gamer 2 qui construit la maison -------------//
+//------------ Method for the gamer button 2 that builds the house -------------//
 
 void MyGrid::on_button_place_maison2()
 {
@@ -425,7 +420,7 @@ void MyGrid::on_button_place_maison2()
 
 void MyGrid::set_clicked_maison2(bool N_val)
 {
-  this->clicked_maison2 = N_val; //maison
+  this->clicked_maison2 = N_val; 
 }
 
 bool MyGrid::get_clicked_maison2()
@@ -437,7 +432,7 @@ bool MyGrid::get_clicked_maison2()
 
 
 
-//////------------ Methode pour le button gamer 2 qui construit la colonie -------------//////
+//////------------ Method for the gamer button 2 that builds the colony -------------//////
 
 
 
@@ -449,7 +444,7 @@ void MyGrid::on_button_place_colonie2()
 
 void MyGrid::set_clicked_colonie2(bool N_val)
 {
-  this->clicked_colonie2 = N_val; //colonie
+  this->clicked_colonie2 = N_val; 
 }
 
 bool MyGrid::get_clicked_colonie2()
@@ -461,7 +456,7 @@ bool MyGrid::get_clicked_colonie2()
 
 
 /**
-  * Initialisation de la page 2. cree les labels, connecte le buttons, et utiliser l'analyseur pour remplir le menubar
+  * Initialization of page 2.create the labels, connect the buttons, and use the parser to fill in the menubar 
 */
 
 
@@ -488,16 +483,16 @@ void MyGrid::Page2()
     quit.set_label("QUIT");
     subMenuFiles.append(quit);
 
-    //on fait l'appel de l'instance de la classe Myarea
+    //  we call the instance of the Myarea class
     close.signal_activate().connect(sigc::mem_fun(*this, &MyGrid::on_button_info_clicked2));
     open.signal_activate().connect(sigc::mem_fun(*this, &MyGrid::on_button_info_clicked));
     quit.signal_activate().connect(sigc::ptr_fun(&Gtk::Main::quit));
-    menuLayout.pack_start(menuBar, Gtk::PACK_SHRINK); //nous voulions que tous les widgets aient la même taille.
+    menuLayout.pack_start(menuBar, Gtk::PACK_SHRINK); //we wanted all widgets to be the same size.
 
     menuLayout.set_hexpand(true);
     this->attach(menuLayout,0, 0, 1, 1);
 
-    ////-----Game1-----////
+    ////-----Gamer 1-----////
 
     etiquette.set_text("Gamer_1");
     etiquette.set_justify(Gtk::JUSTIFY_RIGHT);
@@ -549,7 +544,7 @@ void MyGrid::Page2()
     this->attach(gridGame2, 2, 1, 1, 1);    
     
 
-    ////-------- Des --------////
+    ////-------- Dice --------////
 
     LabelDice.set_text("Dice game :");
     LabelDice.set_justify(Gtk::JUSTIFY_RIGHT);
@@ -590,7 +585,7 @@ void MyGrid::Page2()
     this->attach(m_Frame, 1, 5, 1,1);
 
 
-    /////-------images resources-------/////
+    /////-------images resource-------/////
 
     LabelRess.set_text("Ressources ");
     LabelRess.set_justify(Gtk::JUSTIFY_RIGHT);
@@ -637,16 +632,16 @@ void MyGrid::Page2()
 }
 
 
-//////---------- Methode pour le lancement de dés ----------//////
+//////---------- Method for rolling dice ----------//////
 
 void MyGrid::lancerDe() {
-	// en genere la somme de deux valeurs aléatoire  
+	// generates the sum of two random values 
   LabelDice.set_text("Dice game is "+ std::__cxx11::to_string((rand()%6+1) + (rand()%6+1)));
 }
 
 
 
-/////-------- Message d'information ---------/////
+/////-------- Information message ---------/////
 
 void MyGrid::on_button_info_clicked()
 {
@@ -676,7 +671,7 @@ void MyGrid::on_button_info_clicked2()
 
 
 
-////------- Destructeur --------////
+////------- Destructive --------////
 
 MyGrid::~MyGrid()
 {

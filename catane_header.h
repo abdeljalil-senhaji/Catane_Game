@@ -15,10 +15,10 @@
 
 
 
-////////////////////////// class de dessin ///////////////////////////////////////
+////////////////////////// drawing class ///////////////////////////////////////
 
 
-////////////////////////// class de ménu grid ///////////////////////////////////////
+////////////////////////// menu grid class ///////////////////////////////////////
 
 
 class MyGrid ;
@@ -44,7 +44,7 @@ class MyArea : public Gtk::DrawingArea
   // Override mouse events
   bool on_button_press_event(GdkEventButton * event);
 
-  // varible stocker l'image utilise Glib
+  // Variable store image uses Glib
   Glib::RefPtr<Gdk::Pixbuf> m_image , tuile_image,route1_image, route2_image, maison1_image, maison2_image, colonie1_image, colonie2_image;
 
   double beginPoint_x, beginPoint_y, endPoint_x, endPoint_y, lineWidth, width, height;
@@ -61,25 +61,25 @@ class MyArea : public Gtk::DrawingArea
   bool second_click;
 
   private:
-  std::vector<int> X,Y;    //route
-  std::vector<int> X1,Y1;  //maison
-  std::vector<int> X2,Y2;  //colonie
+  std::vector<int> X,Y;    //road
+  std::vector<int> X1,Y1;  //house
+  std::vector<int> X2,Y2;  //colony
   //Gamer2
-  std::vector<int> X3,Y3;    //route2
-  std::vector<int> X4,Y4;  //maison2
-  std::vector<int> X5,Y5;  //colonie2
+  std::vector<int> X3,Y3;    //road2
+  std::vector<int> X4,Y4;  //house2
+  std::vector<int> X5,Y5;  //colony2
 
   //Place tuilles : 
   std::vector<int> X_tuille{227, 226, 363, 501, 226, 294, 293, 294, 293, 364, 364, 364, 364, 434, 434, 435, 430, 435, 501,500, 500,505,570,569,571, 570, 638, 639, 640};
   std::vector<int> Y_tuille{180, 342, 263, 342, 261, 141, 220, 301, 380, 100, 184, 340, 419, 63, 141, 224, 383, 462, 102, 181, 260,423, 143, 225,301, 381, 341, 262, 186};
-  // appel par reffernce de la classe parent Mygrid 
+  // call by reference of the parent class Mygrid
   MyGrid & parent ; 
 };
 
 
 
 /**
- * Main grid ajouter a la window.
+ * Main grid add to window.
 */
 
 
@@ -172,7 +172,7 @@ class MyGrid : public Gtk::Grid
 ////////////////////////// class de la fenêtre principale ///////////////////////////////////////
 
 /**
-  * Fenetre principale contenant la grid
+  * Main window containing the grid
 */
 
 class Fenetre : public Gtk::Window
