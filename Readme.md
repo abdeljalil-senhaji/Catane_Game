@@ -1,4 +1,4 @@
-![logo](/images/catan.jpg)
+![logo](/images/logo.jpg)
 
 
 

@@ -1,17 +1,4 @@
 #include "catane_header.h"
-#include "logicGame.h"
-
-#include <iostream>
-#include <string>     
-#include <gtkmm/window.h>
-#include <cairomm/surface.h>
-#include <cairomm/context.h>
-#include <gdkmm/general.h> 
-#include <glibmm/fileutils.h>
-
-
-
-
 
 
 ///////////////////////////////////////// classe fenetre principal /////////////////////////////////////////////
@@ -49,13 +36,13 @@ Fenetre::~Fenetre()
 MyArea::MyArea(MyGrid & parent_win)  : parent(parent_win)
 {
   
-  // Stockege de lmage de la plateau 
+  // Stockege de image de la plateau 
   m_image = Gdk::Pixbuf::create_from_file("images/plateau.png", 3650, 3650);
   // Reglage  de l'échelle d'image 
   m_image = m_image->scale_simple(m_image->get_width()*0.15, (m_image->get_height()*0.15), Gdk::INTERP_BILINEAR);
 
   // Gamer 1
-  // Stockege de lmage de la route 
+  // Stockege de image de la route 
   route1_image = Gdk::Pixbuf::create_from_file("images/Route_Bleue.png");
   // Reglage  de l'échelle d'image
   route1_image = route1_image->scale_simple(route1_image->get_width()*0.5, (route1_image->get_height()*0.5), Gdk::INTERP_BILINEAR);

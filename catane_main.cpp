@@ -1,5 +1,4 @@
 #include "catane_header.h"
-#include "logicGame.h"
 #include <gtkmm.h>
 #include <iostream>
 #include <gtkmm/main.h>
