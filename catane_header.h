@@ -36,7 +36,7 @@ class MyArea : public Gtk::DrawingArea
 
 
   protected:
-  
+
   //Override default signal handler:
 
   bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
@@ -45,7 +45,7 @@ class MyArea : public Gtk::DrawingArea
   bool on_button_press_event(GdkEventButton * event);
 
   // varible stocker l'image utilise Glib
-  Glib::RefPtr<Gdk::Pixbuf> m_image , route1_image, route2_image, maison1_image, maison2_image, colonie1_image, colonie2_image;
+  Glib::RefPtr<Gdk::Pixbuf> m_image , tuile_image,route1_image, route2_image, maison1_image, maison2_image, colonie1_image, colonie2_image;
 
   double beginPoint_x, beginPoint_y, endPoint_x, endPoint_y, lineWidth, width, height;
 
@@ -70,8 +70,8 @@ class MyArea : public Gtk::DrawingArea
   std::vector<int> X5,Y5;  //colonie2
 
   //Place tuilles : 
-  std::vector<int> X_tuille{227, 226, 363, 501};
-  std::vector<int> Y_tuille{180, 342, 263, 342};
+  std::vector<int> X_tuille{227, 226, 363, 501, 226, 294, 293, 294, 293, 364, 364, 364, 364, 434, 434, 435, 430, 435, 501,500, 500,505,570,569,571, 570, 638, 639, 640};
+  std::vector<int> Y_tuille{180, 342, 263, 342, 261, 141, 220, 301, 380, 100, 184, 340, 419, 63, 141, 224, 383, 462, 102, 181, 260,423, 143, 225,301, 381, 341, 262, 186};
   // appel par reffernce de la classe parent Mygrid 
   MyGrid & parent ; 
 };

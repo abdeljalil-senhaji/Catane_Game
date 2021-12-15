@@ -1,4 +1,4 @@
-![](/images/catane.png)
+![logo](/images/catan.jpg)
 
 
 
@@ -25,33 +25,28 @@ In the project root directory, generate the *Makefile*
 Before the installation, make sure you have C++ 2011 version and Gtkmm 3.0.
 
 
-`https://gitlab.com/....`
+`clone https://github.com/abdeljalil-senhaji/Catane_Game`
 
 `cd catane_app`
 
 To get started, write in the console the following command:
 
-`make clean; 
+`make clean`
 
-make; 
+`make`
 
-./catane;`
-
-
-## Tree view
-
-* `/modele` : the headers and sources files relating to the model part of the project
-* `/vue` : the headers and sources files relating to the view part of the project
-* `/controleur` : the headers and sources files relating to the controller part of the project
-* `/images` : the images necesary for the project
-* `/fonts` : the fonts necesary for the project
-* `/tests` : the headers and sources files relating to the tests of the model part of the project
-* `/cmake` : the CMake script to find the SDL2-ttf library
-* `/documents` : the documents used for the project management
+`./catane`
 
 Please, see this following example:
 
 ![Example](Tutorial.gif)
+
+## Tree view
+
+* `/src` : the headers and sources files relating to the view part of the project
+* `/images` : the images necesary for the project
+* `/make` : the Make script to find the GTKmm library
+* `/Document` : the documents used for the catane game rules
 
 
 ## Built With
@@ -66,7 +61,7 @@ Please, see this following example:
 
 # Code
 
-The interface was developed in oriented-object format, each window is a class. Each class contains methods for points attribution and texts/drawings on the formulaires.
+The interface was developed in oriented-object format, each window is a class. Each class contains methods for drawings.
 
 
 ## Author

@@ -178,13 +178,28 @@ bool MyArea::on_button_press_event(GdkEventButton *event)
 bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
   
-  
   std::cout << "Coordonner click" << std::endl;
   if (m_image) {
     cr->save();
     Gdk::Cairo::set_source_pixbuf(cr, m_image, 160, 0);
     //Gdk::Cairo::set_source_pixbuf(cr, m_image);
     cr->rectangle(0, 0, get_width(), get_height());
+    cr->fill();
+    cr->restore();
+  }
+  // ajoute des tuilles de facons aleatoire en utilisent la methode rand
+
+  std::vector<int> T ={2,10,7,3,11,5,6,7,11,3,6,5,6,2,10,3,11,8,7,2,6,9,10,4,11,6,7,8,10};
+  for (int i=0, j=0 ; i<X_tuille.size() ,j <T.size();i++ , j++ )
+  {
+    cr->save();
+    int num = rand() % 10 +2;
+  
+    tuile_image = Gdk::Pixbuf::create_from_file("images/"+std::__cxx11::to_string(T[j])+".png");
+    tuile_image = tuile_image->scale_simple(tuile_image->get_width()*0.35, (tuile_image->get_height()*0.35), Gdk::INTERP_BILINEAR);
+    Gdk::Cairo::set_source_pixbuf(cr, tuile_image, X_tuille[i]-14, Y_tuille[i]-14);
+  
+    cr->rectangle(0, 0, get_width(), get_height()); 
     cr->fill();
     cr->restore();
   }
