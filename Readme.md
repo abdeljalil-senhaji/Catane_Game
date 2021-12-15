@@ -35,6 +35,11 @@ To get started, write in the console the following command:
 
 `make`
 
+```
+make
+
+```
+
 `./catane`
 
 Please, see this following example:
