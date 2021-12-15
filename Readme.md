@@ -7,10 +7,8 @@
 
 [![Documentation](https://img.shields.io/badge/Documentation-github-brightgreen.svg?style=for-the-badge)](https://github.com/abdeljalil-senhaji/Vampire_Game)
 
+Description :  Colonization and management of the natural resources of an island. The winner is the one who accumulates 10 victory points. We develop on the island by placing settlements, building roads, collecting natural resources that ensure expansion. A mechanism of medium complexity, which is renewed thanks to the variable construction of the topology of the island. You never play the same part, even if the mechanisms are repeated. The outcome of the game depends heavily on the initial placement of settlements. A plethora of base game expansions have appeared on the market. A classic, practically entered in the pantheon of board games. (https://catanuniverse.com/fr/)
 
-In Vampire, players assume the personas of vampires — the immortal bloodsuckers of the horror genre — and guide these characters through a world virtually identical to our own. But these aren’t quite the vam- pires you might know from Dracula or Twilight. The vampires that exist now — or Kindred, or Cainites, as they commonly call themselves — are both similar to and different from what we might expect. In many ways, vampires resemble the familiar monsters of myth,cinema, folklore, and fiction. However — as many an intrepid vampire-hunter has learned to his sorrow — not all of the stories about vampires are true. 
-
-(https://catanuniverse.com/fr/)
 
 ## Getting Started
 
@@ -25,7 +23,7 @@ In the project root directory, generate the *Makefile*
 Before the installation, make sure you have C++ 2011 version and Gtkmm 3.0.
 
 
-`clone https://github.com/abdeljalil-senhaji/Catane_Game`
+`clone git https://github.com/abdeljalil-senhaji/Catane_Game`
 
 `cd catane_app`
 
@@ -33,22 +31,19 @@ To get started, write in the console the following command:
 
 `make clean`
 
+
 `make`
 
-```
-make
-
-```
 
 `./catane`
 
 Please, see this following example:
 
-![Example](Tutorial.gif)
+![Example](Tutorial_Game.gif)
 
 ## Tree view
 
-* `/src` : the headers and sources files relating to the view part of the project
+* `/src` : the headers and sources files of the project
 * `/images` : the images necesary for the project
 * `/make` : the Make script to find the GTKmm library
 * `/Document` : the documents used for the catane game rules
